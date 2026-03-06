@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="2.7.1" version="1.0">
+  This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
+  <lib desc="#Wiring" name="0"/>
+  <lib desc="#Gates" name="1"/>
+  <lib desc="#Plexers" name="2"/>
+  <lib desc="#Arithmetic" name="3"/>
+  <lib desc="#Memory" name="4"/>
+  <lib desc="#I/O" name="5"/>
+  <lib desc="#Base" name="6">
+    <tool name="Text Tool">
+      <a name="text" val=""/>
+      <a name="font" val="SansSerif plain 12"/>
+    </tool>
+  </lib>
+  <main name="main"/>
+  <options>
+    <a name="gateUndefined" val="ignore"/>
+    <a name="simlimit" val="1000"/>
+    <a name="simrand" val="0"/>
+  </options>
+  <mappings>
+    <tool lib="6" map="Button2" name="Menu Tool"/>
+    <tool lib="6" map="Button3" name="Menu Tool"/>
+    <tool lib="6" map="Ctrl Button1" name="Menu Tool"/>
+  </mappings>
+  <toolbar>
+    <tool lib="6" name="Poke Tool"/>
+    <tool lib="6" name="Edit Tool"/>
+    <tool lib="6" name="Text Tool"/>
+    <sep/>
+    <tool lib="0" name="Pin">
+      <a name="tristate" val="false"/>
+    </tool>
+    <tool lib="0" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="labelloc" val="east"/>
+    </tool>
+    <tool lib="1" name="NOT Gate"/>
+    <tool lib="1" name="AND Gate"/>
+    <tool lib="1" name="OR Gate"/>
+  </toolbar>
+  <circuit name="main">
+    <a name="circuit" val="main"/>
+    <a name="clabel" val=""/>
+    <a name="clabelup" val="east"/>
+    <a name="clabelfont" val="SansSerif plain 12"/>
+
+    <!-- Input Pin A -->
+    <comp lib="0" loc="(150,200)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="A"/>
+    </comp>
+
+    <!-- Input Pin B -->
+    <comp lib="0" loc="(150,300)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="B"/>
+    </comp>
+
+    <!-- Input Pin C -->
+    <comp lib="0" loc="(150,400)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="C"/>
+    </comp>
+
+    <!-- NOT Gate for B' -->
+    <comp lib="1" loc="(280,260)" name="NOT Gate"/>
+
+    <!-- AND Gate 1: A · B' -->
+    <comp lib="1" loc="(390,220)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+
+    <!-- AND Gate 2: B · C -->
+    <comp lib="1" loc="(390,370)" name="AND Gate">
+      <a name="size" val="30"/>
+    </comp>
+
+    <!-- OR Gate: (A·B') + (B·C) -->
+    <comp lib="1" loc="(520,300)" name="OR Gate">
+      <a name="size" val="30"/>
+    </comp>
+
+    <!-- Output Pin F -->
+    <comp lib="0" loc="(590,300)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="label" val="F"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+
+    <!-- Wires -->
+    <!-- A to AND1 top input -->
+    <wire from="(150,200)" to="(350,200)" />
+    <wire from="(350,200)" to="(350,210)" />
+    <wire from="(350,210)" to="(360,210)" />
+
+    <!-- B to NOT gate -->
+    <wire from="(150,300)" to="(200,300)" />
+    <wire from="(200,300)" to="(200,260)" />
+    <wire from="(200,260)" to="(250,260)" />
+
+    <!-- NOT output to AND1 bottom input -->
+    <wire from="(280,260)" to="(330,260)" />
+    <wire from="(330,260)" to="(330,230)" />
+    <wire from="(330,230)" to="(360,230)" />
+
+    <!-- B to AND2 top input -->
+    <wire from="(200,300)" to="(200,360)" />
+    <wire from="(200,360)" to="(360,360)" />
+
+    <!-- C to AND2 bottom input -->
+    <wire from="(150,400)" to="(300,400)" />
+    <wire from="(300,400)" to="(300,380)" />
+    <wire from="(300,380)" to="(360,380)" />
+
+    <!-- AND1 output to OR top input -->
+    <wire from="(390,220)" to="(440,220)" />
+    <wire from="(440,220)" to="(440,290)" />
+    <wire from="(440,290)" to="(490,290)" />
+
+    <!-- AND2 output to OR bottom input -->
+    <wire from="(390,370)" to="(440,370)" />
+    <wire from="(440,370)" to="(440,310)" />
+    <wire from="(440,310)" to="(490,310)" />
+
+    <!-- OR output to F -->
+    <wire from="(520,300)" to="(590,300)" />
+
+    <!-- Labels -->
+    <comp lib="6" loc="(120,175)" name="Text">
+      <a name="text" val="F(A,B,C) = (A · B') + (B · C)"/>
+      <a name="font" val="SansSerif bold 14"/>
+    </comp>
+
+  </circuit>
+</project>
