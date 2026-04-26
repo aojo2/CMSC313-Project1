@@ -1,0 +1,27 @@
+CMSC 313 Project 2 - double
+Anthony Ojo (aojo2)
+
+Files
+-----
+double.s    GAS assembly source
+HOWTO.txt   this file
+
+Build (on gl.umbc.edu)
+----------------------
+as --32 -o double.o double.s
+ld -m elf_i386 -o double double.o
+
+Run
+---
+./double 5      -> The double is: 10
+./double 17     -> The double is: 34
+./double 0      -> The double is: 0
+./double -8     -> The double is: -16
+./double 100    -> The double is: 200
+./double        -> Usage: ./double <integer>   (exit 1)
+
+Notes
+-----
+- Reads the integer from argv[1].
+- Uses Linux int 0x80 syscalls (sys_write = 4, sys_exit = 1). No libc.
+- atoi and itoa are written by hand and handle negatives and 0.
